@@ -92,7 +92,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 import { useRoute } from 'vue-router'
 
 interface NavigationItem {
@@ -110,6 +110,7 @@ const navigationItems: NavigationItem[] = [
 
 const route = useRoute()
 const isMenuOpen = ref(false)
+const hideContent = inject<() => void>('hideContent')
 
 const isActive = (path: string): boolean => {
   return route.path === path
@@ -120,6 +121,10 @@ const toggleMenu = (): void => {
 }
 
 const closeMenu = (): void => {
+  // Hide content immediately before route change
+  if (hideContent) {
+    hideContent()
+  }
   isMenuOpen.value = false
 }
 

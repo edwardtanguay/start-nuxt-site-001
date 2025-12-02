@@ -6,6 +6,15 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
     typeCheck: 'build'
+  },
+  app: {
+    pageTransition: false,
+    layoutTransition: false
+  },
+  router: {
+    options: {
+      scrollBehaviorType: 'auto'
+    }
   }
 })
 
